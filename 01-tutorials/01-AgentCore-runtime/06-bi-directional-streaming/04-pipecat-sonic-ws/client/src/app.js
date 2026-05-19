@@ -77,12 +77,11 @@ async function connect() {
         },
         onUserStartedSpeaking: () => {
           log("User speaking...", "log-system");
-          // Interrupt bot audio playback for barge-in.
-          // The transport doesn't wire this up automatically —
-          // we call userStartedSpeaking() on its internal media manager.
-          if (transport._mediaManager) {
-            transport._mediaManager.userStartedSpeaking();
-          }
+          // Barge-in disabled: calling transport._mediaManager.userStartedSpeaking()
+          // corrupts the audio player state in the Pipecat WebSocket transport,
+          // causing all subsequent bot audio to be silently dropped.
+          // Nova Sonic handles interruption server-side (stops generating when
+          // it detects user speech), so client-side barge-in is not needed.
         },
         onUserStoppedSpeaking: () => {
           log("User stopped speaking", "log-system");
