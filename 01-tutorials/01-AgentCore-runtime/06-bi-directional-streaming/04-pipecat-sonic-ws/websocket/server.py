@@ -326,7 +326,7 @@ async def build_pipeline(websocket: WebSocket, mcp_client: MCPClient | None):
         region=os.getenv("AWS_REGION", "us-east-1"),
         session_token=os.getenv("AWS_SESSION_TOKEN"),
         settings=AWSNovaSonicLLMService.Settings(
-            voice="arjun",
+            voice="kiara",
             system_instruction=SYSTEM_INSTRUCTION,
             endpointing_sensitivity="HIGH",
         ),
